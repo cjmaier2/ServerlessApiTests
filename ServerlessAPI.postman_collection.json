@@ -32,7 +32,10 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"numOfItems\", jsonData.length);"
 						]
 					}
 				}
@@ -81,7 +84,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Item by Id",
+			"name": "Get Items with new item",
 			"event": [
 				{
 					"listen": "test",
@@ -89,7 +92,37 @@
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							""
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var numOfItems = postman.getEnvironmentVariable(\"numOfItems\");",
+							"tests[\"Number of items incremented\"] = jsonData.length === parseInt(numOfItems) + 1;",
+							"postman.setEnvironmentVariable(\"numOfItems\", jsonData.length); //update number of items"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseUrl}}/items",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Item has correct id\"] = jsonData.id === postman.getEnvironmentVariable(\"testItemId\");",
+							"tests[\"Inventory count is 1\"] = jsonData.currentInventory === 1;"
 						]
 					}
 				}
@@ -114,7 +147,7 @@
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Your test name\"] = jsonData.currentInventory === 2;"
+							"tests[\"Inventory count is 2\"] = jsonData.currentInventory === 2;"
 						]
 					}
 				},
@@ -147,6 +180,32 @@
 			"response": []
 		},
 		{
+			"name": "Get Item with new count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Item has correct id\"] = jsonData.id === postman.getEnvironmentVariable(\"testItemId\");",
+							"tests[\"Inventory count is 2\"] = jsonData.currentInventory === 2;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseUrl}}/items/{{testItemId}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "Delete Item",
 			"event": [
 				{
@@ -162,6 +221,28 @@
 			"request": {
 				"url": "{{baseUrl}}/items/{{testItemId}}",
 				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item after deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 404\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseUrl}}/items/{{testItemId}}",
+				"method": "GET",
 				"header": [],
 				"body": {},
 				"description": ""
