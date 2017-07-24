@@ -35,7 +35,9 @@
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
 							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"numOfItems\", jsonData.length);"
+							"postman.setEnvironmentVariable(\"numOfItems\", jsonData.length);",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				}
@@ -60,7 +62,9 @@
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Item created has correct id\"] = jsonData.id === postman.getEnvironmentVariable(\"testItemId\");"
+							"tests[\"Item created has correct id\"] = jsonData.id === postman.getEnvironmentVariable(\"testItemId\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				}
@@ -96,7 +100,9 @@
 							"var jsonData = JSON.parse(responseBody);",
 							"var numOfItems = postman.getEnvironmentVariable(\"numOfItems\");",
 							"tests[\"Number of items incremented\"] = jsonData.length === parseInt(numOfItems) + 1;",
-							"postman.setEnvironmentVariable(\"numOfItems\", jsonData.length); //update number of items"
+							"postman.setEnvironmentVariable(\"numOfItems\", jsonData.length); //update number of items",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				}
@@ -122,7 +128,9 @@
 							"",
 							"var jsonData = JSON.parse(responseBody);",
 							"tests[\"Item has correct id\"] = jsonData.id === postman.getEnvironmentVariable(\"testItemId\");",
-							"tests[\"Inventory count is 1\"] = jsonData.currentInventory === 1;"
+							"tests[\"Inventory count is 1\"] = jsonData.currentInventory === 1;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				}
@@ -147,7 +155,9 @@
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Inventory count is 2\"] = jsonData.currentInventory === 2;"
+							"tests[\"Inventory count is 2\"] = jsonData.currentInventory === 2;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				},
@@ -191,7 +201,9 @@
 							"",
 							"var jsonData = JSON.parse(responseBody);",
 							"tests[\"Item has correct id\"] = jsonData.id === postman.getEnvironmentVariable(\"testItemId\");",
-							"tests[\"Inventory count is 2\"] = jsonData.currentInventory === 2;"
+							"tests[\"Inventory count is 2\"] = jsonData.currentInventory === 2;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				}
@@ -213,7 +225,9 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				}
@@ -235,7 +249,9 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"Status code is 404\"] = responseCode.code === 404;"
+							"tests[\"Status code is 404\"] = responseCode.code === 404;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
 					}
 				}
