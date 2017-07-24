@@ -8,29 +8,6 @@
 	},
 	"item": [
 		{
-			"name": "Get Items",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "https://msm3xtp6jg.execute-api.us-east-2.amazonaws.com/Stage/api/items",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "Get Item by Id",
 			"event": [
 				{
@@ -45,6 +22,28 @@
 			],
 			"request": {
 				"url": "https://msm3xtp6jg.execute-api.us-east-2.amazonaws.com/Stage/api/items/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://msm3xtp6jg.execute-api.us-east-2.amazonaws.com/Stage/api/items",
 				"method": "GET",
 				"header": [],
 				"body": {},
