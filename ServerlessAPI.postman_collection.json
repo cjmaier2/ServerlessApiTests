@@ -168,7 +168,7 @@
 							"tests[\"Number of items incremented\"] = jsonData.length === parseInt(numOfItems) + 1;",
 							"postman.setEnvironmentVariable(\"numOfItems\", jsonData.length); //update number of items",
 							"",
-							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+							"tests[\"Response time is less than 300ms\"] = responseTime < 300;"
 						]
 					}
 				}
